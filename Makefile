@@ -6,7 +6,7 @@
 #    By: acami <acami@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/14 15:34:26 by acami             #+#    #+#              #
-#    Updated: 2021/06/22 13:23:47 by acami            ###   ########.fr        #
+#    Updated: 2021/06/22 13:27:31 by acami            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ OBJS			=	$(addprefix $(OBJ_DIR), $(OBJ_F))
 
 CC				=	gcc
 CFLAGS			=	-Wall -Wextra -Werror -O3
-LIBS			=	-lmlx -lm -lft \
+LIBS			=	-lmlx -lm \
 					-L $(MINILIBX_DIR) \
 					-framework OpenGL -framework AppKit -framework OpenCL
 INCLUDES		=	-I $(HEADERS_DIR) -I $(MINILIBX_DIR)

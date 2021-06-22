@@ -2,3 +2,4 @@
 *.out
 *.debug
 fractol
+./objs/*

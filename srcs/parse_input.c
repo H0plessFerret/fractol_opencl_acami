@@ -6,7 +6,7 @@
 /*   By: acami <acami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:27:35 by acami             #+#    #+#             */
-/*   Updated: 2021/06/22 13:23:20 by acami            ###   ########.fr       */
+/*   Updated: 2021/06/22 13:27:12 by acami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int32_t	parseParams(char **argv, t_fractol *fractol, int32_t curr_arg)
 
 	if (ft_strequ(argv[curr_arg], "-W"))
 	{
-		param_val = ft_atoi(argv[curr_arg + 1]);
+		param_val = atoi(argv[curr_arg + 1]);
 		if (param_val < 1 || param_val > 3840)
 			xShowHelp(argv[curr_arg + 1]);
 		fractol->width = param_val;
@@ -60,7 +60,7 @@ static int32_t	parseParams(char **argv, t_fractol *fractol, int32_t curr_arg)
 	}
 	if (ft_strequ(argv[curr_arg], "-H"))
 	{
-		param_val = ft_atoi(argv[curr_arg + 1]);
+		param_val = atoi(argv[curr_arg + 1]);
 		if (param_val < 1 || param_val > 2160)
 			xShowHelp(argv[curr_arg + 1]);
 		fractol->height = param_val;
