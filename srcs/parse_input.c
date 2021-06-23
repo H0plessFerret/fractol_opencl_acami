@@ -6,7 +6,7 @@
 /*   By: acami <acami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:27:35 by acami             #+#    #+#             */
-/*   Updated: 2021/06/22 13:27:12 by acami            ###   ########.fr       */
+/*   Updated: 2021/06/22 15:46:35 by acami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ static void	xShowHelp(char *bad_param)
 
 	buffer_space = " ----- ";
 	fprintf(stdin, "Error!\nBad input or unknown parameter: %s\n", bad_param);
-	fprintf(stdin, "Usage: ./fractol [-W 0 < WIDTH < 3841] [-H 0 < HEIGHT < 2161] <FRACTAL_NAME>\n");
+	fprintf(stdin, "Usage: ./fractol [-W %d < WIDTH < 3841] \
+		[-H %d < HEIGHT < 2161] <FRACTAL_NAME>\n",
+		WORKGROUP_SIZE, WORKGROUP_SIZE);
 	fprintf(stdin, "Fractals supported:\n");
 	fprintf(stdin, "%sMandelbrot\n", buffer_space);
 	fprintf(stdin, "%sJulia\n", buffer_space);
@@ -53,7 +55,7 @@ static int32_t	parseParams(char **argv, t_fractol *fractol, int32_t curr_arg)
 	if (ft_strequ(argv[curr_arg], "-W"))
 	{
 		param_val = atoi(argv[curr_arg + 1]);
-		if (param_val < 1 || param_val > 3840)
+		if (param_val < WORKGROUP_SIZE || param_val > 3840)
 			xShowHelp(argv[curr_arg + 1]);
 		fractol->width = param_val;
 		return (2);
@@ -61,7 +63,7 @@ static int32_t	parseParams(char **argv, t_fractol *fractol, int32_t curr_arg)
 	if (ft_strequ(argv[curr_arg], "-H"))
 	{
 		param_val = atoi(argv[curr_arg + 1]);
-		if (param_val < 1 || param_val > 2160)
+		if (param_val < WORKGROUP_SIZE || param_val > 2160)
 			xShowHelp(argv[curr_arg + 1]);
 		fractol->height = param_val;
 		return (2);

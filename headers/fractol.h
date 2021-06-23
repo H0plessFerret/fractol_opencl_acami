@@ -6,7 +6,7 @@
 /*   By: acami <acami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 15:25:22 by acami             #+#    #+#             */
-/*   Updated: 2021/06/21 19:21:11 by acami            ###   ########.fr       */
+/*   Updated: 2021/06/22 16:35:41 by acami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 
 # define COLOURS_SUPPORTED	4
 
-# define WG_SIZE			256
+// Basically amount of threads being supported by a program
+# define WORKGROUP_SIZE		256
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -107,8 +108,7 @@ struct s_fractolOCL
 	cl_context			context;
 	cl_device_id		device_id;
 	cl_command_queue	queue;
-	cl_mem				real;
-	cl_mem				imaginary;
+	cl_mem				lines;
 	cl_mem				result;
 };
 

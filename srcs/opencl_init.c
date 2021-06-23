@@ -6,7 +6,7 @@
 /*   By: acami <acami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 19:27:11 by acami             #+#    #+#             */
-/*   Updated: 2021/06/21 17:10:46 by acami            ###   ########.fr       */
+/*   Updated: 2021/06/22 16:21:58 by acami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,9 @@ void	initOpenCL(t_fractolOCL *fractolOCL)
 		panic(OPENCL_INIT_ERROR);
 	fractolOCL->kernel = initKernel(fractolOCL->device_id, fractolOCL->context,
 			fractolOCL->fractol->fractal_func);
-	fractolOCL->real = clCreateBuffer(fractolOCL->context, CL_MEM_READ_ONLY,
-			fractolOCL->fractol->width * sizeof(double), NULL, &err_code);
-	fractolOCL->imaginary = clCreateBuffer(fractolOCL->context,
-			CL_MEM_READ_ONLY, fractolOCL->fractol->height * sizeof(double),
-			NULL, &err_code);
+	fractolOCL->lines = clCreateBuffer(fractolOCL->context,
+			CL_MEM_WRITE_ONLY, (WORKGROUP_SIZE + 1) * sizeof(double), NULL,
+			&err_code);
 	fractolOCL->result = clCreateBuffer(fractolOCL->context, CL_MEM_WRITE_ONLY,
 			fractolOCL->fractol->width * fractolOCL->fractol->height
 			* sizeof(int32_t), NULL, &err_code);

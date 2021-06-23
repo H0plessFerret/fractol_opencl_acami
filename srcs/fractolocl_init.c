@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractolOCL_init.c                                  :+:      :+:    :+:   */
+/*   fractolocl_init.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acami <acami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 17:06:02 by acami             #+#    #+#             */
-/*   Updated: 2021/06/21 17:42:50 by acami            ###   ########.fr       */
+/*   Updated: 2021/06/22 13:41:11 by acami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 
 static void	fractolHooksInit(t_fractolOCL *fractolOCL)
 {
-	mlx_hook(fractolOCL->fractol->window, DESTROYNOTIFY, NOEVENTMASK, closeWindow, NULL);
-	mlx_hook(fractolOCL->fractol->window, KEYPRESS, NOEVENTMASK, keyPressHandler, fractolOCL);
-	mlx_hook(fractolOCL->fractol->window, BUTTONPRESS, NOEVENTMASK, buttonPressHandler,
-		fractolOCL);
+	mlx_hook(fractolOCL->fractol->window, DESTROYNOTIFY, NOEVENTMASK,
+		closeWindow, NULL);
+	mlx_hook(fractolOCL->fractol->window, KEYPRESS, NOEVENTMASK,
+		keyPressHandler, fractolOCL);
+	mlx_hook(fractolOCL->fractol->window, BUTTONPRESS, NOEVENTMASK,
+		buttonPressHandler, fractolOCL);
 	mlx_hook(fractolOCL->fractol->window, BUTTONRELEASE, NOEVENTMASK,
 		buttonReleaseHandler, fractolOCL);
-	mlx_hook(fractolOCL->fractol->window, MOTIONNOTIFY, NOEVENTMASK, motionHandler,
-		fractolOCL);
+	mlx_hook(fractolOCL->fractol->window, MOTIONNOTIFY, NOEVENTMASK,
+		motionHandler, fractolOCL);
 }
 
 void	fractolOCLInit(t_fractolOCL *fractolOCL)
