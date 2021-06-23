@@ -6,7 +6,7 @@
 /*   By: acami <acami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:27:35 by acami             #+#    #+#             */
-/*   Updated: 2021/06/22 13:27:12 by acami            ###   ########.fr       */
+/*   Updated: 2021/06/23 16:06:55 by acami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ static void	xShowHelp(char *bad_param)
 	char	*buffer_space;
 
 	buffer_space = " ----- ";
-	fprintf(stdin, "Error!\nBad input or unknown parameter: %s\n", bad_param);
-	fprintf(stdin, "Usage: ./fractol [-W 0 < WIDTH < 3841] [-H 0 < HEIGHT < 2161] <FRACTAL_NAME>\n");
-	fprintf(stdin, "Fractals supported:\n");
-	fprintf(stdin, "%sMandelbrot\n", buffer_space);
-	fprintf(stdin, "%sJulia\n", buffer_space);
-	fprintf(stdin, "%sBurningShip\n", buffer_space);
+	fprintf(stdout, "Error!\nBad input or unknown parameter: %s\n", bad_param);
+	fprintf(stdout, "Usage: ./fractol [-W 0 < WIDTH < 3841] [-H 0 < HEIGHT < 2161] <FRACTAL_NAME>\n");
+	fprintf(stdout, "Fractals supported:\n");
+	fprintf(stdout, "%sMandelbrot\n", buffer_space);
+	fprintf(stdout, "%sJulia\n", buffer_space);
+	fprintf(stdout, "%sBurningShip\n", buffer_space);
 	exit(EXIT_FAILURE);
 }
 
