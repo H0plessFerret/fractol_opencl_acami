@@ -6,7 +6,7 @@
 /*   By: acami <acami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 15:25:22 by acami             #+#    #+#             */
-/*   Updated: 2021/06/24 14:58:13 by acami            ###   ########.fr       */
+/*   Updated: 2021/06/24 15:42:25 by acami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # define COLOURS_SUPPORTED	4
 
-# define WG_SIZE			128
+# define WG_SIZE			256
 
 # include <stdlib.h>
 # include <unistd.h>
