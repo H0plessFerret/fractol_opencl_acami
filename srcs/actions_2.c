@@ -6,7 +6,7 @@
 /*   By: acami <acami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/24 14:48:01 by acami             #+#    #+#             */
-/*   Updated: 2021/06/24 16:47:58 by acami            ###   ########.fr       */
+/*   Updated: 2021/06/24 16:51:54 by acami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	changeParam(int32_t x, int32_t y, int32_t button, t_fractol *fractol)
 {
 	(void)button;
 	fractol->lmb_pressed = true;
-	if (x > 0 && y > 0)
+	if (x < 0 || y < 0 || x > fractol->width || y >fractol->height)
 		setComplex(&(fractol->extra_param),
 			(double)x * (fractol->re_max - fractol->re_min) / fractol->width
 			+ fractol->re_min,
