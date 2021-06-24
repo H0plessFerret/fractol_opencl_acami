@@ -6,7 +6,7 @@
 /*   By: acami <acami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 19:25:26 by acami             #+#    #+#             */
-/*   Updated: 2021/06/21 19:46:50 by acami            ###   ########.fr       */
+/*   Updated: 2021/06/24 14:45:48 by acami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ void	fractolDraw(t_fractolOCL *fractolOCL)
 		panic(OPENCL_COPY_ERROR);
 	err_code = clSetKernelArg(fractolOCL->kernel, 0, sizeof(cl_mem), &(fractolOCL->real));
 	err_code |= clSetKernelArg(fractolOCL->kernel, 1, sizeof(cl_mem), &(fractolOCL->imaginary));
-	err_code |= clSetKernelArg(fractolOCL->kernel, 2, sizeof(int32_t), &(fractolOCL->fractol->width));
-	err_code |= clSetKernelArg(fractolOCL->kernel, 3, sizeof(int32_t), &(fractolOCL->fractol->max_iterations));
-	err_code |= clSetKernelArg(fractolOCL->kernel, 4, sizeof(cl_mem), &(fractolOCL->result));
+	err_code |= clSetKernelArg(fractolOCL->kernel, 2, sizeof(int32_t), &(fractolOCL->fractol->height));
+	err_code |= clSetKernelArg(fractolOCL->kernel, 3, sizeof(int32_t), &(fractolOCL->fractol->width));
+	err_code |= clSetKernelArg(fractolOCL->kernel, 4, sizeof(int32_t), &(fractolOCL->fractol->max_iterations));
+	err_code |= clSetKernelArg(fractolOCL->kernel, 5, sizeof(cl_mem), &(fractolOCL->result));
 	if (err_code != CL_SUCCESS)
 		panic(OPENCL_COPY_ERROR);
 	local_size = WG_SIZE;

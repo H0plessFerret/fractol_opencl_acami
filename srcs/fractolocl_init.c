@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractolOCL_init.c                                  :+:      :+:    :+:   */
+/*   fractolocl_init.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acami <acami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 17:06:02 by acami             #+#    #+#             */
-/*   Updated: 2021/06/21 17:42:50 by acami            ###   ########.fr       */
+/*   Updated: 2021/06/24 14:58:22 by acami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 
 static void	fractolHooksInit(t_fractolOCL *fractolOCL)
 {
-	mlx_hook(fractolOCL->fractol->window, DESTROYNOTIFY, NOEVENTMASK, closeWindow, NULL);
-	mlx_hook(fractolOCL->fractol->window, KEYPRESS, NOEVENTMASK, keyPressHandler, fractolOCL);
-	mlx_hook(fractolOCL->fractol->window, BUTTONPRESS, NOEVENTMASK, buttonPressHandler,
-		fractolOCL);
+	mlx_hook(fractolOCL->fractol->window, DESTROYNOTIFY, NOEVENTMASK,
+		(int (*)())closeWindow, NULL);
+	mlx_hook(fractolOCL->fractol->window, KEYPRESS, NOEVENTMASK,
+		(int (*)())keyPressHandler, fractolOCL);
+	mlx_hook(fractolOCL->fractol->window, BUTTONPRESS, NOEVENTMASK,
+		(int (*)())buttonPressHandler, fractolOCL);
 	mlx_hook(fractolOCL->fractol->window, BUTTONRELEASE, NOEVENTMASK,
-		buttonReleaseHandler, fractolOCL);
-	mlx_hook(fractolOCL->fractol->window, MOTIONNOTIFY, NOEVENTMASK, motionHandler,
-		fractolOCL);
+		(int (*)())buttonReleaseHandler, fractolOCL);
+	mlx_hook(fractolOCL->fractol->window, MOTIONNOTIFY, NOEVENTMASK,
+		(int (*)())motionHandler, fractolOCL);
 }
 
 void	fractolOCLInit(t_fractolOCL *fractolOCL)
@@ -43,11 +45,11 @@ void	fractolOCLInit(t_fractolOCL *fractolOCL)
 			&(fractol->bpp), &(fractol->line_len),
 			&(fractol->endian));
 	fractol->lmb_pressed = false;
-	fractolFunctionInit(fractolOCL);
+	fractolFunctionInit(fractolOCL->fractol);
 	fractolHooksInit(fractolOCL);
 }
 
-void	fractolFunctionInit(t_fractolOCL *fractolOCL)
+void	fractolFunctionInit(t_fractol *fractol)
 {
 	static const t_fractalInfo	frac_info[FRACTALS_SUPPORTED] = {
 		[Mandelbrot] = {-2., 1., -1.5, 1.5, "mandelbrotOCL", 50, 7, {0., 0.},
@@ -57,10 +59,8 @@ void	fractolFunctionInit(t_fractolOCL *fractolOCL)
 		[BurningShip] = {-2., 1., -1., 2., "burningShipOCL", 50, 7, {0., 0.},
 			DefaultColour}
 	};
-	t_fractol					*fractol;
 	t_fractalId					curr_id;
 
-	fractol = fractolOCL->fractol;
 	curr_id = (fractol->fract_id) % FRACTALS_SUPPORTED;
 	fractol->re_min = frac_info[curr_id].re_min_start;
 	fractol->re_max = frac_info[curr_id].re_max_start;

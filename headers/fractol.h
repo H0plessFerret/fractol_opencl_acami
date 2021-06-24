@@ -6,7 +6,7 @@
 /*   By: acami <acami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 15:25:22 by acami             #+#    #+#             */
-/*   Updated: 2021/06/21 19:21:11 by acami            ###   ########.fr       */
+/*   Updated: 2021/06/24 14:58:13 by acami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 # define COLOURS_SUPPORTED	4
 
-# define WG_SIZE			256
+# define WG_SIZE			128
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -41,6 +41,9 @@ typedef struct s_fractol		t_fractol;
 typedef struct s_fractolOCL		t_fractolOCL;
 typedef struct s_fractalInfo	t_fractalInfo;
 typedef int32_t					(*t_handerAction)();
+typedef void					(*t_keyAction)(int32_t key, t_fractol *fractol);
+typedef void					(*t_buttonAction)(int32_t x, int32_t y,
+								int32_t key, t_fractol *fractol);
 
 enum e_fractalId
 {
@@ -113,64 +116,75 @@ struct s_fractolOCL
 };
 
 // Parse arguments of the program call and return the correct fractal_id
-t_fractalId		parseInput(int argc, char **argv, t_fractol *fractol);
+void	parseInput(int argc, char **argv, t_fractol *fractol);
 
 // Initializes all things needed for OpenCL to run
-void			initOpenCL(t_fractolOCL *fractolOCL);
+void	initOpenCL(t_fractolOCL *fractolOCL);
 
 // Draw the fractal currently held in memory using OpenCL
-void			fractolDraw(t_fractolOCL *fractolOCL);
+void	fractolDraw(t_fractolOCL *fractolOCL);
 
 // Initializes default values for the fractol function
-void			fractolFunctionInit(t_fractolOCL *fractolOCL);
+void	fractolFunctionInit(t_fractol *fractol);
 
 // Initializes t_fractol struct
-void			fractolOCLInit(t_fractolOCL *fractolOCL);
+void	fractolOCLInit(t_fractolOCL *fractolOCL);
 
 // Prints error message and exits the program
-void			panic(const char *errstr);
+void	panic(const char *errstr);
 
 // Returns true if strings are equal and false if they are not
-bool			ft_strequ(const char *str1, const char *str2);
+bool	ft_strequ(const char *str1, const char *str2);
 
 // Sets new values for a complex number
-void			setComplex(t_complex *number, double new_re, double new_im);
+void	setComplex(t_complex *number, double new_re, double new_im);
 
 // Puts a pixel of a certain colour into an image
-void			putPixel(t_fractol *fractol, int32_t x, int32_t y,
-					int32_t colour);
+void	putPixel(t_fractol *fractol, int32_t x, int32_t y,
+			int32_t colour);
 
 // Malloc wrapper with error handling
-void			*xMalloc(uintmax_t bytes_to_allocate);
+void	*xMalloc(uintmax_t bytes_to_allocate);
 
 // ---------------------- EVENT  HANDLING ---------------------- //
-
 // Closes window (both from ESC and pressing the button on the window)
-int32_t			closeWindow(void);
+void	closeWindow(int32_t key, t_fractol *fractol);
 
 // Maps key presses to actions
-int32_t			keyPressHandler(int32_t key, t_fractolOCL *fractolOCL);
+void	keyPressHandler(int32_t key, t_fractolOCL *fractolOCL);
 
 // Maps button presses to actions
-int32_t			buttonPressHandler(int32_t button, int x, int y,
-					t_fractolOCL *fractolOCL);
+void	buttonPressHandler(int32_t button, int x, int y,
+			t_fractolOCL *fractolOCL);
 
 // Maps button releases to actions
-int32_t			buttonReleaseHandler(int32_t button, int x, int y,
-					t_fractolOCL *fractolOCL);
+void	buttonReleaseHandler(int32_t button, int x, int y,
+			t_fractolOCL *fractolOCL);
 
 // Handles mouse movements
-int32_t			motionHandler(int32_t x, int32_t y, t_fractolOCL *fractolOCL);
+void	motionHandler(int32_t x, int32_t y, t_fractolOCL *fractolOCL);
 
 // Translates fractal x_shift to the right and im_shift up
-int32_t			translateFractal(double re_shift, double im_shift,
-					t_fractolOCL *fractolOCL);
+void	translateFractal(int32_t key, t_fractol *fractol);
+
+// Reset fractal to default values
+void	resetFractal(int32_t key, t_fractol *fractol);
+
+// Redraws fractal
+void	updateFractal(int32_t key, t_fractol *fractol);
+
+// Changes max_iteration param in fractol
+void	changeIterations(int32_t key, t_fractol *fractol);
+
+// Changes colour_scheme param in fractol
+void	changeColour(int32_t key, t_fractol *fractol);
 
 // Zooms in on the point (x, y) with the zoom factor factor
-int32_t			zoomFractal(int32_t x, int32_t y, double factor,
-					t_fractolOCL *fractolOCL);
+void	zoomFractal(int32_t x, int32_t y, int32_t button,
+			t_fractol *fractol);
 
 // Changes parameter for Julia-type of fractals according to the mouse position
-int32_t			changeParam(int32_t x, int32_t y, t_fractolOCL *fractolOCL);
+void	changeParam(int32_t x, int32_t y, int32_t button,
+			t_fractol *fractol);
 
 #endif
