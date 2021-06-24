@@ -3,4 +3,5 @@
 *.debug
 fractol
 objs*
-
+*.a
+minilibx_opengl/*.o
