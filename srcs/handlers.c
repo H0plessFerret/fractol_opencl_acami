@@ -6,7 +6,7 @@
 /*   By: acami <acami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:55:00 by acami             #+#    #+#             */
-/*   Updated: 2021/06/24 14:56:39 by acami            ###   ########.fr       */
+/*   Updated: 2021/06/24 16:48:29 by acami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	motionHandler(int32_t x, int32_t y, t_fractolOCL *fractolOCL)
 	t_fractol	*fractol;
 
 	fractol = fractolOCL->fractol;
-	if (fractol->lmb_pressed == false)
+	if (fractol->lmb_pressed == false || x <= 0 || y <= 0)
 		return ;
 	setComplex(&(fractol->extra_param),
 		(double)x * (fractol->re_max - fractol->re_min) / fractol->width
