@@ -6,7 +6,7 @@
 /*   By: acami <acami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:27:35 by acami             #+#    #+#             */
-/*   Updated: 2021/06/24 14:52:53 by acami            ###   ########.fr       */
+/*   Updated: 2021/06/24 15:19:12 by acami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	xShowHelp(char *bad_param)
 
 	buffer_space = " ----- ";
 	fprintf(stdout, "Error!\nBad input or unknown parameter: %s\n", bad_param);
-	fprintf(stdout, "Usage: ./fractol [-W 0 < WIDTH < 3841] [-H 0 < HEIGHT < 2161] <FRACTAL_NAME>\n");
+	fprintf(stdout, "Usage: ./fractol [-W 0 < WIDTH < 3841] "\
+		"[-H 0 < HEIGHT < 2161] <FRACTAL_NAME>\n");
 	fprintf(stdout, "Fractals supported:\n");
 	fprintf(stdout, "%sMandelbrot\n", buffer_space);
 	fprintf(stdout, "%sJulia\n", buffer_space);
