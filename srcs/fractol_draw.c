@@ -6,7 +6,7 @@
 /*   By: acami <acami@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 19:25:26 by acami             #+#    #+#             */
-/*   Updated: 2021/06/24 15:17:02 by acami            ###   ########.fr       */
+/*   Updated: 2021/06/24 15:33:08 by acami            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ static void	setKernelArgs(t_fractolOCL *fractolOCL)
 			&(fractolOCL->fractol->max_iterations));
 	err_code |= clSetKernelArg(fractolOCL->kernel, 5, sizeof(cl_mem),
 			&(fractolOCL->result));
+	err_code |= clSetKernelArg(fractolOCL->kernel, 6, sizeof(double),
+			&(fractolOCL->fractol->extra_param.real));
+	err_code |= clSetKernelArg(fractolOCL->kernel, 7, sizeof(double),
+			&(fractolOCL->fractol->extra_param.imaginary));
 	if (err_code != CL_SUCCESS)
 		panic(OPENCL_COPY_ERROR);
 }
